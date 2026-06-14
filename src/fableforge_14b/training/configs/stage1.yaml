@@ -1,0 +1,33 @@
+base_model: "Qwen/Qwen2.5-14B"
+dataset_path: "data/vfable_100k.jsonl"
+output_dir: "output/stage1"
+
+LoRA_r: 64
+LoRA_alpha: 128
+LoRA_dropout: 0.05
+LoRA_target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+
+batch_size: 4
+gradient_accumulation_steps: 8
+learning_rate: 0.0002
+num_epochs: 3
+max_seq_length: 4096
+warmup_ratio: 0.1
+weight_decay: 0.01
+lr_scheduler_type: "cosine"
+
+save_steps: 500
+eval_steps: 500
+logging_steps: 10
+
+use_unsloth: true
+use_4bit_quantization: true
+bf16: true
+seed: 42

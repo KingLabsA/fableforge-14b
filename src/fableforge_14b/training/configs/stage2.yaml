@@ -1,0 +1,43 @@
+stage2_adapter: "output/stage1"
+dataset_path: "data/coding_excellence_100k.jsonl"
+output_dir: "output/stage2"
+
+LoRA_r: 64
+LoRA_alpha: 128
+LoRA_dropout: 0.05
+LoRA_target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+
+batch_size: 4
+gradient_accumulation_steps: 8
+learning_rate: 0.0001
+num_epochs: 2
+max_seq_length: 8192
+warmup_ratio: 0.05
+weight_decay: 0.01
+lr_scheduler_type: "cosine"
+
+save_steps: 500
+eval_steps: 500
+logging_steps: 10
+
+use_unsloth: true
+bf16: true
+seed: 42
+
+skill_categories:
+  - algorithm_implementation
+  - api_design
+  - debugging
+  - refactoring
+  - testing
+  - documentation
+
+code_quality_filter: "high"
+min_pass_rate: 0.85

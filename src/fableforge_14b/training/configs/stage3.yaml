@@ -1,0 +1,43 @@
+stage2_adapter: "output/stage2"
+dataset_path: "data/error_recovery_18k.jsonl"
+output_dir: "output/stage3"
+
+LoRA_r: 32
+LoRA_alpha: 64
+LoRA_dropout: 0.05
+LoRA_target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+
+batch_size: 2
+gradient_accumulation_steps: 16
+learning_rate: 0.00005
+num_epochs: 2
+max_seq_length: 8192
+warmup_ratio: 0.05
+weight_decay: 0.01
+lr_scheduler_type: "cosine"
+
+save_steps: 200
+eval_steps: 200
+logging_steps: 10
+
+bf16: true
+seed: 42
+
+error_categories:
+  - syntax_error
+  - type_error
+  - import_error
+  - runtime_error
+  - logic_error
+  - off_by_one
+  - null_reference
+  - timeout_error
+  - permission_error
+  - configuration_error
+
+include_stack_traces: true
+max_retries_per_error: 3
